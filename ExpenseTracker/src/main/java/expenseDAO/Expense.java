@@ -6,9 +6,6 @@ import java.sql.SQLException;
 
 public class Expense {
 	
-	
-
-	
 	public boolean insert(int monthyear,double amount,double expense)
 	{
 		int rows=0;
