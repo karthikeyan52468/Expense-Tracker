@@ -12,7 +12,9 @@ public class SignUp extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		resp.getWriter().print("signup");
+		
+		resp.getWriter().print(req.getParameter("email"));
+		resp.getWriter().print(req.getParameter("name"));
 	}
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
