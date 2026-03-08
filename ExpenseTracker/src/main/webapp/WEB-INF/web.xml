@@ -14,6 +14,27 @@
   </filter-mapping>
   
   <servlet>
+  <servlet-name>viewMonthly</servlet-name>
+  <servlet-class>controller.ViewMonthly</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>viewMonthly</servlet-name>
+    <url-pattern>/auth/viewMonthly</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+  <servlet-name>viewExpense</servlet-name>
+  <servlet-class>controller.ViewExpense</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>viewExpense</servlet-name>
+    <url-pattern>/auth/viewExpense</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
   <servlet-name>signup</servlet-name>
   <servlet-class>controller.SignUp</servlet-class>
   </servlet>

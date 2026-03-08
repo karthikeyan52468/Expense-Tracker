@@ -30,7 +30,7 @@ public class AuthenticationFilter implements Filter {
 			chain.doFilter(request, response);
 			
 			else {
-				if(req.getServletPath().equals("/viewExpense")||req.getServletPath().equals("/viewMonthly"))
+				if(req.getServletPath().equals("/auth/viewExpense")||req.getServletPath().equals("/auth/viewMonthly"))
 				{
 					chain.doFilter(request, response);
 				}
