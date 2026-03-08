@@ -2,7 +2,16 @@
 <web-app xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>ExpenseTracker</display-name>
   
+  <filter>
+  <filter-name>authenticationFilter</filter-name>
+  <filter-class>controller.AuthenticationFilter</filter-class>
+  </filter>
   
+  <filter-mapping>
+  <filter-name>authenticationFilter</filter-name>
+  <url-pattern>/auth/*</url-pattern>
+  
+  </filter-mapping>
   
   <servlet>
   <servlet-name>signup</servlet-name>
@@ -12,9 +21,17 @@
   <servlet-mapping>
    <servlet-name>signup</servlet-name>
    <url-pattern>/signup</url-pattern>
-   
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>logout</servlet-name>
+  <servlet-class>controller.Logout</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>logout</servlet-name>
+  <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
   
   <servlet>
   <servlet-name>monthlyExpense</servlet-name>
@@ -23,7 +40,7 @@
   
   <servlet-mapping>
   <servlet-name>monthlyExpense</servlet-name>
-  <url-pattern>/monthlyExpense</url-pattern>
+  <url-pattern>/auth/monthlyExpense</url-pattern>
   </servlet-mapping>
   
     <servlet>
@@ -33,7 +50,7 @@
   
   <servlet-mapping>
    <servlet-name>generate</servlet-name>
-   <url-pattern>/generate</url-pattern>
+   <url-pattern>/auth/generate</url-pattern>
    
   </servlet-mapping>
   
@@ -56,7 +73,7 @@
   
   <servlet-mapping>
    <servlet-name>insertExpense</servlet-name>
-   <url-pattern>/insertExpense</url-pattern>
+   <url-pattern>/auth/insertExpense</url-pattern>
    
   </servlet-mapping>
 </web-app>
