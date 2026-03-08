@@ -16,6 +16,16 @@
   </servlet-mapping>
   
   
+  <servlet>
+  <servlet-name>monthlyExpense</servlet-name>
+  <servlet-class>controller.MonthlyExpense</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>monthlyExpense</servlet-name>
+  <url-pattern>/monthlyExpense</url-pattern>
+  </servlet-mapping>
+  
     <servlet>
   <servlet-name>generate</servlet-name>
   <servlet-class>controller.Generate</servlet-class>
