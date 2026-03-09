@@ -71,7 +71,7 @@
   
   <servlet-mapping>
    <servlet-name>generate</servlet-name>
-   <url-pattern>/auth/generate</url-pattern>
+   <url-pattern>/auth/monthlyReport</url-pattern>
    
   </servlet-mapping>
   
@@ -92,9 +92,18 @@
   <servlet-class>controller.InsertExpense</servlet-class>
   </servlet>
   
+  <servlet>
+  <servlet-name>expenseReport</servlet-name>
+  <servlet-class>controller.ExportExpense</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>expenseReport</servlet-name>
+  <url-pattern>/auth/expenseReport</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
    <servlet-name>insertExpense</servlet-name>
    <url-pattern>/auth/insertExpense</url-pattern>
-   
   </servlet-mapping>
 </web-app>

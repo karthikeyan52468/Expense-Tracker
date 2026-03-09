@@ -1,0 +1,10 @@
+<beanio xmlns="http://www.beanio.org/2012/03">
+<stream name="exp" format="csv">
+<record name="exportModel" class="Model.ExportModel">
+<field name="id"/>
+<field name="monthyear"/>
+<field name="amount"/>
+<field name="expense"/>
+</record>
+</stream>
+</beanio>
