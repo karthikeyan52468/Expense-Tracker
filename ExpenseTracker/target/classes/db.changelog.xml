@@ -7,6 +7,11 @@
 
     <!-- Table: expense -->
     <changeSet id="1" author="karthi">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="expense"/>
+            </not>
+        </preConditions>
         <createTable tableName="expense">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -21,6 +26,11 @@
 
     <!-- Table: monthly -->
     <changeSet id="2" author="karthi">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="monthly"/>
+            </not>
+        </preConditions>
         <createTable tableName="monthly">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -33,6 +43,11 @@
 
     <!-- Table: details -->
     <changeSet id="3" author="karthi">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="details"/>
+            </not>
+        </preConditions>
         <createTable tableName="details">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -43,5 +58,6 @@
             <column name="email" type="VARCHAR(20)"/>
         </createTable>
     </changeSet>
+
 
 </databaseChangeLog>
