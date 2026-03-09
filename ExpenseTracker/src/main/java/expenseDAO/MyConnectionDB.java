@@ -11,6 +11,14 @@ import java.util.Properties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import liquibase.Liquibase;
+import liquibase.database.Database;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.DatabaseException;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
+
 public class MyConnectionDB {
 
 
@@ -41,7 +49,14 @@ static
 		config.setJdbcUrl(prop.getProperty("db.url"));
 		dataSource=new HikariDataSource(config);
 	
-		
+		try {
+			Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(dataSource.getConnection()));
+			Liquibase liquibase=new Liquibase("db.changelog.xml", new ClassLoaderResourceAccessor(), database);
+			liquibase.update("");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static Connection getConnection() throws SQLException

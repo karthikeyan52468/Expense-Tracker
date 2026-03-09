@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+    <!-- Table: expense -->
+    <changeSet id="1" author="karthi">
+        <createTable tableName="expense">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="monthyear" type="INT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="amount" type="DOUBLE"/>
+            <column name="expense" type="DOUBLE" defaultValue="0"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Table: monthly -->
+    <changeSet id="2" author="karthi">
+        <createTable tableName="monthly">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="expenseName" type="VARCHAR(20)"/>
+            <column name="amount" type="DOUBLE"/>
+            <column name="monthyear" type="INT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Table: details -->
+    <changeSet id="3" author="karthi">
+        <createTable tableName="details">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(15)"/>
+            <column name="password" type="VARCHAR(256)"/>
+            <column name="role" type="VARCHAR(10)"/>
+            <column name="email" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
