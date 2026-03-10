@@ -13,12 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import config.Jwt;
 
-public class AuthenticationFilter implements Filter {
-	static Logger log = Logger.getLogger(AuthenticationFilter.class.getName());
+public class JwtAuthenticationFilter implements Filter{
+	static Logger log = Logger.getLogger(JwtAuthenticationFilter.class.getName());
 	FileHandler handler=null;
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -34,66 +33,43 @@ public class AuthenticationFilter implements Filter {
 		log.addHandler(handler);
 		Filter.super.init(filterConfig);
 	}
-	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		HttpServletRequest req=(HttpServletRequest)request;
+		String token=req.getHeader("Authorization");
+		//System.out.println(token);
 		
-		
-		
-		HttpServletRequest req= (HttpServletRequest) request;
-		HttpSession session = req.getSession(false);
-		PrintWriter out = response.getWriter();
-		
-		String token=Jwt.getToken();
-		String role=Jwt.role();
-		if(token!=null && role!=null)
+		if(token==null|| token.isEmpty() &&!token.startsWith("Bearer "))
 		{
-			if(role.equals("admin"))
-			{
-				log.info("admin successfully login");
-				chain.doFilter(request, response);
-			}
+			chain.doFilter(request, response);
+		
 			
-			else {
-			
-				if(req.getServletPath().equals("/auth/viewMonthly")||req.getServletPath().equals("/auth/viewMonthly"))
-				{
-					chain.doFilter(request, response);
-				}
-				else {
-					log.warning("401");
-					out.print(401);
-				}
-			}
 		}
 		else {
-	
-		if(session!=null && session.getAttribute("role")!=null)
-		{
-			
-			if(session.getAttribute("role").equals("admin"))
+			token = token.substring(7);
+			System.out.println(token);
+		Jwt obj=Jwt.getInstance();
+			if(obj.validate(token))
 			{
 				chain.doFilter(request, response);
 			}
 			else {
-				if(req.getServletPath().equals("/auth/viewMonthly")||req.getServletPath().equals("/auth/viewExpense"))
-				{
-					chain.doFilter(request, response);
-				}
-				else {
-					log.warning("401");
-					out.print(401);
-				}
+				PrintWriter out = response.getWriter();
+				log.warning("invalid");
+				out.print("invalid");
 			}
+			
+			
+			
+		
+			// TODO Auto-generated catch block
+			
+		
 		}
-		else {
-			log.warning("invalid");
-			out.print("invalid ");
-		}
+		
+		
 	}
-	}
-	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -101,5 +77,4 @@ public class AuthenticationFilter implements Filter {
 		Filter.super.destroy();
 	}
 
-	
 }

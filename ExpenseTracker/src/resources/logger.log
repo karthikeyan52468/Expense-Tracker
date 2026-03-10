@@ -32,3 +32,5 @@ Mar 09, 2026 10:48:22 PM controller.AuthenticationFilter doFilter
 WARNING: please login
 Mar 09, 2026 10:52:08 PM controller.AuthenticationFilter doFilter
 WARNING: please login
+Mar 10, 2026 10:48:47 PM controller.JwtAuthenticationFilter doFilter
+WARNING: invalid

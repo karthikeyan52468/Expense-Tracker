@@ -3,6 +3,15 @@
   <display-name>ExpenseTracker</display-name>
   
   <filter>
+  <filter-name>jwtAuthenticationFilter</filter-name>
+  <filter-class>controller.JwtAuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  <filter-name>jwtAuthenticationFilter</filter-name>
+    <url-pattern>/auth/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
   <filter-name>authenticationFilter</filter-name>
   <filter-class>controller.AuthenticationFilter</filter-class>
   </filter>
@@ -12,6 +21,15 @@
   <url-pattern>/auth/*</url-pattern>
   
   </filter-mapping>
+  
+  <servlet>
+  <servlet-name>jwtLogin</servlet-name>
+  <servlet-class>controller.JwtLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>jwtLogin</servlet-name>
+  <url-pattern>/jwtLogin</url-pattern>
+  </servlet-mapping>
   
   <servlet>
   <servlet-name>viewMonthly</servlet-name>
