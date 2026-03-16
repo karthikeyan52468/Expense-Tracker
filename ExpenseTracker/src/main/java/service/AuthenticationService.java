@@ -12,20 +12,22 @@ import expenseDAO.MyConnectionDB;
 
 public class AuthenticationService {
 
-	static Connection con;
-	static PreparedStatement ps;
-	static ResultSet rs;
+
 	
 	public static boolean check(String email,String password) throws SQLException {
 		
+		 Connection con=null;
+		 PreparedStatement ps=null;
+		 ResultSet rs=null;
 		try {
 			 con=MyConnectionDB.getConnection();
-			 ps = con.prepareStatement("select * from details where BINARY  email=?");
+			 ps = con.prepareStatement("select * from details where   email=?");
 			ps.setString(1, email);
 			
 		  rs= ps.executeQuery();
 			if(rs.next())
 			{
+				try {
 				if(BCrypt.checkpw(password,rs.getString("password")))
 				{
 					Details d=	Details.getInstance();
@@ -36,6 +38,11 @@ public class AuthenticationService {
 				
 					return true;
 				}
+				}
+				catch(Exception e)
+				{
+					return false;
+				}
 		
 			}
 		} catch (Exception e) {
@@ -43,6 +50,7 @@ public class AuthenticationService {
 		return false;
 		}
 		finally {
+	
 			ps.close();
 			rs.close();
 			con.close();

@@ -58,6 +58,13 @@
             <column name="email" type="VARCHAR(20)"/>
         </createTable>
     </changeSet>
-
-
+		
+		<changeSet id="5" author="karthi">
+		<preConditions onFail="MARK_RAN">
+		<not>
+		<uniqueConstraintExists tableName="details" constraintName="email_un" />
+		</not>
+		</preConditions>
+		<sql>alter table details add constraint email_un unique(email)</sql>
+		</changeSet>
 </databaseChangeLog>
