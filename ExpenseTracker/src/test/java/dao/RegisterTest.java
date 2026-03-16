@@ -16,7 +16,7 @@ public class RegisterTest {
 	{
 		
 		RegisterUserDAO obj= RegisterUserDAO.getInstance();
-		assertTrue(obj.insert("junit","junit","junit"));
+		assertTrue(obj.insert("junit22211","junit22211","junit22211"));
 	}
 	
 	@Test

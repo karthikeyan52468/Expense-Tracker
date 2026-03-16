@@ -3,6 +3,8 @@ package expenseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import service.MonthlyService;
+
 public class Monthly {
 
 	static Monthly obj=null;
@@ -24,22 +26,8 @@ public class Monthly {
 			return false;
 		}
 		
-		int rows=0;
-		try
-		{
-		Connection con=MyConnectionDB.getConnection();
-		PreparedStatement ps = con.prepareStatement("insert into monthly (expenseName,amount,monthyear) values(?,?,?)");
-		ps.setString(1, eName);
-		ps.setDouble(2, amount);
-		ps.setInt(3, monthyear);
-	    rows= ps.executeUpdate();
-	    con.close();
-	    ps.close();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		
+		int rows=MonthlyService.insert(eName, amount, monthyear);
 		return rows>0;
 	}
 }

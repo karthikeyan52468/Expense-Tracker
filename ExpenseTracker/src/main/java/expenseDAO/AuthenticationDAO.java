@@ -3,8 +3,10 @@ package expenseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import Model.Details;
+import service.AuthenticationSerice;
 
 public class AuthenticationDAO {
 
@@ -22,27 +24,10 @@ public class AuthenticationDAO {
 	{
 		
 		try {
-			Connection con=MyConnectionDB.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from details where BINARY  email=? and BINARY  password=?");
-			ps.setString(1, email);
-			ps.setString(2, password);
-			ResultSet rs= ps.executeQuery();
-			if(rs.next())
-			{
-			Details d=	Details.getInstance();
-			d.setEmail(rs.getString("email"));
-			d.setName(rs.getString("name"));
-			d.setPassword(rs.getString("password"));
-			d.setRole(rs.getString("role"));
-			ps.close();
-			rs.close();
-			con.close();
-			return true;
-			}
-		} catch (Exception e) {
+			return AuthenticationSerice.check(email, password);
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 }

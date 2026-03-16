@@ -1,8 +1,8 @@
 package expenseDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import service.ExpenseService;
 
 public class Expense {
 	
@@ -13,22 +13,14 @@ public class Expense {
 		{
 			return false;
 		}
-		int rows=0;
+	
+			int rows=0;
 		try {
-			Connection con=MyConnectionDB.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into expense (monthyear,amount,expense) values(?,?,?)");
-			ps.setInt(1, monthyear);
-			ps.setDouble(2, amount);
-			ps.setDouble(3, expense);
-			rows=ps.executeUpdate();
-			
-			con.close();
-			ps.close();
-		
+			rows = ExpenseService.insert(monthyear, amount, expense);
 		} catch (SQLException e) {
-		
-			e.printStackTrace();
-		} 
+			// TODO Auto-generated catch block
+			return false;
+		}
 		
 		return rows>0;
 	}

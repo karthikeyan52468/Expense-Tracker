@@ -1,4 +1,4 @@
-package expenseDAO;
+package service;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import expenseDAO.MyConnectionDB;
 
 public class GenerateCSV {
 
@@ -25,12 +27,15 @@ public class GenerateCSV {
 	
 	public void generateReport(int monthyear) 
 	{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
 		try {
 			BufferedWriter bw= new BufferedWriter(new FileWriter("E:\\Expense Tracker\\ExpenseTracker\\src\\resources\\report.csv"));
-			Connection con = MyConnectionDB.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from monthly where monthyear=?");
+			con = MyConnectionDB.getConnection();
+		    ps = con.prepareStatement("select * from monthly where monthyear=?");
 			ps.setInt(1, monthyear);
-			ResultSet rs =ps.executeQuery();
+			 rs =ps.executeQuery();
 			while(rs.next())
 			{
 				int id=rs.getInt(1);
@@ -40,14 +45,24 @@ public class GenerateCSV {
 				bw.write(id+","+","+expenseName+","+amount+","+date);
 				bw.newLine();
 			}
-			System.out.println("done");
+			
 			bw.close();
-			rs.close();
-			ps.close();
-			con.close();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				rs.close();
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		}
 	}
 }

@@ -2,6 +2,7 @@ package dao;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class ExpenseTest {
 	public void expense_Insert_Test() {
 		
 		Expense obj= new Expense();
-		assertNotEquals(0,obj.insert(5, 100, 50));
+		assertTrue(obj.insert(223555, 223555, 223555));
 	}
 	
 	@Test

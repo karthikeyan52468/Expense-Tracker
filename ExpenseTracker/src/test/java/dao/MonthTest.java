@@ -14,13 +14,13 @@ public class MonthTest {
 	public void insertTest()
 	{
 		Monthly obj= Monthly.getInstance();
-		assertTrue(obj.insert("junit", 1000, 32026));
+		assertTrue(obj.insert("junit666", 1000, 32026));
 	}
 	
 	@Test
 	public void insert_Test_fail()
 	{
 		Monthly obj= Monthly.getInstance();
-		assertFalse(obj.insert("junit", 0,0));
+		assertFalse(obj.insert("junit123", 0,0));
 	}
 }

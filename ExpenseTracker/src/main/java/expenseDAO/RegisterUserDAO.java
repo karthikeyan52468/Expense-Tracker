@@ -1,10 +1,6 @@
 package expenseDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import Model.Details;
+import service.RegisterUserService;
 
 public class RegisterUserDAO {
 
@@ -23,26 +19,9 @@ public class RegisterUserDAO {
 		{
 			return false;
 		}
+		int rows =RegisterUserService.insert(name, password, email);
 		
-		int rows =0;
-		try {
-			
-			Connection con = MyConnectionDB.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into details (name,password,role,email) values(?,?,?,?)");
-			ps.setString(1, name);
-			ps.setString(2, password);
-			ps.setString(3, "user");
-			ps.setString(4, "email");
-			rows = ps.executeUpdate();
-			
-			con.close();
-			ps.close();
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return rows>0;
 	}
 }
