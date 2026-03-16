@@ -19,6 +19,11 @@ public class RegisterUserDAO {
 	
 	public boolean insert(String name,String password,String email)
 	{
+		if(name==null || password==null || email==null)
+		{
+			return false;
+		}
+		
 		int rows =0;
 		try {
 			
@@ -29,6 +34,9 @@ public class RegisterUserDAO {
 			ps.setString(3, "user");
 			ps.setString(4, "email");
 			rows = ps.executeUpdate();
+			
+			con.close();
+			ps.close();
 			
 			
 		} catch (Exception e) {

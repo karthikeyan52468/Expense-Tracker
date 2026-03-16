@@ -23,7 +23,7 @@ public class AuthenticationDAO {
 		
 		try {
 			Connection con=MyConnectionDB.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from details where email=? and password=?");
+			PreparedStatement ps = con.prepareStatement("select * from details where BINARY  email=? and BINARY  password=?");
 			ps.setString(1, email);
 			ps.setString(2, password);
 			ResultSet rs= ps.executeQuery();
@@ -34,6 +34,9 @@ public class AuthenticationDAO {
 			d.setName(rs.getString("name"));
 			d.setPassword(rs.getString("password"));
 			d.setRole(rs.getString("role"));
+			ps.close();
+			rs.close();
+			con.close();
 			return true;
 			}
 		} catch (Exception e) {

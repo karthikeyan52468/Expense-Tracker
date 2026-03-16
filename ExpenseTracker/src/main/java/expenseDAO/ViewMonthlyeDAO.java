@@ -36,6 +36,9 @@ public class ViewMonthlyeDAO {
 				al.add(new MonthlyModel(rs.getInt("id"), rs.getString("expenseName"),  rs.getDouble("amount"), rs.getInt("monthyear")));
 				
 			}
+			con.close();
+			ps.close();
+			rs.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

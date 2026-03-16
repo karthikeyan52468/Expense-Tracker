@@ -42,6 +42,9 @@ public class GenerateCSV {
 			}
 			System.out.println("done");
 			bw.close();
+			rs.close();
+			ps.close();
+			con.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -36,10 +36,14 @@ public class ExportExpenseDAO {
 				obj.setExpense(rs.getDouble("expense"));
 				al.add(obj);
 			}
+			ps.close();
+			con.close();
+			rs.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return al;
 	}
 	

@@ -8,6 +8,11 @@ public class Expense {
 	
 	public boolean insert(int monthyear,double amount,double expense)
 	{
+		
+		if(monthyear==0|| amount==0)
+		{
+			return false;
+		}
 		int rows=0;
 		try {
 			Connection con=MyConnectionDB.getConnection();
@@ -17,6 +22,8 @@ public class Expense {
 			ps.setDouble(3, expense);
 			rows=ps.executeUpdate();
 			
+			con.close();
+			ps.close();
 		
 		} catch (SQLException e) {
 		
