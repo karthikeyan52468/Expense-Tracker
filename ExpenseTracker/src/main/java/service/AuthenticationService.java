@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import Model.Details;
 import expenseDAO.MyConnectionDB;
 
-public class AuthenticationSerice {
+public class AuthenticationService {
 
 	static Connection con;
 	static PreparedStatement ps;
@@ -18,19 +20,23 @@ public class AuthenticationSerice {
 		
 		try {
 			 con=MyConnectionDB.getConnection();
-			 ps = con.prepareStatement("select * from details where BINARY  email=? and BINARY  password=?");
+			 ps = con.prepareStatement("select * from details where BINARY  email=?");
 			ps.setString(1, email);
-			ps.setString(2, password);
+			
 		  rs= ps.executeQuery();
 			if(rs.next())
 			{
-			Details d=	Details.getInstance();
-			d.setEmail(rs.getString("email"));
-			d.setName(rs.getString("name"));
-			d.setPassword(rs.getString("password"));
-			d.setRole(rs.getString("role"));
+				if(BCrypt.checkpw(password,rs.getString("password")))
+				{
+					Details d=	Details.getInstance();
+					d.setEmail(rs.getString("email"));
+					d.setName(rs.getString("name"));
+					d.setPassword(rs.getString("password"));
+					d.setRole(rs.getString("role"));
+				
+					return true;
+				}
 		
-			return true;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

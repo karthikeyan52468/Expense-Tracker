@@ -1,12 +1,8 @@
 package expenseDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Model.Details;
-import service.AuthenticationSerice;
+import service.AuthenticationService;
 
 public class AuthenticationDAO {
 
@@ -24,7 +20,7 @@ public class AuthenticationDAO {
 	{
 		
 		try {
-			return AuthenticationSerice.check(email, password);
+			return AuthenticationService.check(email, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return false;

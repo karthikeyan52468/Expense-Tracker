@@ -21,6 +21,8 @@
   </build>
 
 <dependencies>
+
+
     <dependency>
 <groupId>javax.servlet</groupId>
 <artifactId>javax.servlet-api</artifactId>
@@ -83,6 +85,13 @@
 <version>4.11</version>
 <scope>test</scope>
 </dependency>
+
+<dependency>
+<groupId>org.mindrot</groupId>
+<artifactId>jbcrypt</artifactId>
+<version>0.4</version>
+</dependency>
+
 
 </dependencies>
 

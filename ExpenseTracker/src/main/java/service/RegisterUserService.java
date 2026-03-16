@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import expenseDAO.MyConnectionDB;
 
 public class RegisterUserService {
@@ -15,7 +17,9 @@ public class RegisterUserService {
 	public static  int insert(String name,String password,String email)
 	{
 try {
+			
 			rows=0;
+			password=BCrypt.hashpw(password, BCrypt.gensalt());
 			con = MyConnectionDB.getConnection();
 			ps = con.prepareStatement("insert into details (name,password,role,email) values(?,?,?,?)");
 			ps.setString(1, name);
